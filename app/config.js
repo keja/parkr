@@ -3,6 +3,7 @@ require.config({
         /* Classes */
         "qr": "lib/classes/qr",
         "cam": "lib/classes/cam",
+        "view": "lib/classes/view",
 
         /* Vendors */
         "jquery-private": "lib/vendor/jquery/jquery.private", //v 1.11

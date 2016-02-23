@@ -1,9 +1,9 @@
 require(["./config"], function(){
 
     //main app
-    require(["jquery", "qr", "cam"], function($, qr, cam){
+    require(["jquery", "view", "qr", "cam"], function($, view, qr, cam){
 
-
+/*
         var canvas = $("#cam").get(0),
             ctx = canvas.getContext('2d'),
             scanFrame = true; //look for qr-code in frames
@@ -15,7 +15,6 @@ require(["./config"], function(){
                 scanFrame = true; //not valid qr code, keep scanning frames
             }else{
                 cam.stop();
-                console.log("Valid QR found:", data);
                 $("#location_id").val(data);
             }
 
@@ -33,6 +32,10 @@ require(["./config"], function(){
                 scanFrame = false; //don't scan more than one frame at the same time (reduce cpu time)
             }
         });
+*/
+        view.init($("#view").get(0));
+        view.login();
+
 
     });
 
