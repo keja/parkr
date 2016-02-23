@@ -9,7 +9,6 @@ define(["jquery", "llqrcode"], function($) {
             $(self).off(event, callback);
         },
         init: function(callback){
-            console.log("Qr init");
             qrcode.callback = function(data) {
                 $(self).trigger("decoded", [data]);
             };
@@ -18,7 +17,6 @@ define(["jquery", "llqrcode"], function($) {
             }
         },
         scan: function(image){
-            console.log("scan qr code");
             try{
                 qrcode.decode(image);
             }catch(error){

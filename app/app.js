@@ -7,7 +7,6 @@ require(["./config"], function(){
         var canvas = $("#cam").get(0),
             ctx = canvas.getContext('2d');
 
-
         qr.init();
         qr.on("decoded", function(event, data){
             var regex = new RegExp("^[0-9]{3}-[0-9]{4}$", "i");
@@ -15,28 +14,18 @@ require(["./config"], function(){
                 scanFrame = true; //not valid qr code, keep scanning frames
             }else{
                 cam.stop();
-                console.log("QR found:", data);
+                console.log("Valid QR found:", data);
+                $("#location_id").val(data);
             }
 
         });
         qr.on("error", function(event, error){
             console.log("error:", error);
             scanFrame = true;
-            qr.init();
         });
 
         cam.start();
-
-        /*
-        cam.on("ready", function(){
-
-            setTimeout(function(){
-                scanFrame = true;
-
-            }, 2500);
-        });
-        */
-        var scanFrame = true;
+        var scanFrame = true; //look for qr-code in frames
         cam.on("capture", function(event, frame){
             ctx.putImageData(frame, 0, 0);
 
