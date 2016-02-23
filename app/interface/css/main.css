@@ -2086,8 +2086,68 @@
 }
 html {
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 html body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: orange;
+  /* VIEWS */
+  /* MENUBAR */
+}
+html body * {
+  outline: none;
+}
+html body #view {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+html body #view .input-group {
+  position: relative;
+  background-color: #fff;
+  width: 80%;
+  height: 120px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+html body #view .input-group input {
+  height: 100%;
+  width: 83%;
+  border: 0;
+  position: absolute;
+  padding: 0;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  margin-left: 17%;
+}
+html body #view .input-group.button input {
+  width: 68%;
+}
+html body #view .input-group.button button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 15%;
+  height: 100%;
+  background-color: #0099DE;
+  font-size: 0;
+}
+html body #view .input-group.button button.cam:before {
+  content: "\f030";
+  font-family: FontAwesome, sans-serif;
+  font-size: 40px;
+  color: #fff;
+}
+html body #view #cam {
+  position: absolute;
+  top: 120px;
+  left: 0;
   width: 100%;
 }
 html body nav {
@@ -2099,6 +2159,7 @@ html body nav ul {
   height: 100%;
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 html body nav ul li {
   float: left;
@@ -2132,4 +2193,7 @@ html body nav ul li.stats a:before {
 }
 html body nav ul li.settings a:before {
   content: "\f085";
+}
+html body nav ul li.qr a:before {
+  content: "\f029";
 }

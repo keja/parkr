@@ -3,7 +3,7 @@ require(["./config"], function(){
     //main app
     require(["jquery", "view", "qr", "cam"], function($, view, qr, cam){
 
-/*
+
         var canvas = $("#cam").get(0),
             ctx = canvas.getContext('2d'),
             scanFrame = true; //look for qr-code in frames
@@ -24,17 +24,25 @@ require(["./config"], function(){
             scanFrame = true;
         });
 
-        cam.start();
-        cam.on("capture", function(event, frame){
-            ctx.putImageData(frame, 0, 0);
-            if(scanFrame){
-                qr.scan(canvas.toDataURL('image/png'));
-                scanFrame = false; //don't scan more than one frame at the same time (reduce cpu time)
-            }
+        cam.init(function(){
+            console.log("init cam");
+            cam.start();
+            cam.on("capture", function(event, frame){
+                ctx.putImageData(frame, 0, 0);
+                if(scanFrame){
+                    qr.scan(canvas.toDataURL('image/png'));
+                    scanFrame = false; //don't scan more than one frame at the same time (reduce cpu time)
+                }
+            });
         });
-*/
+
+        /*
         view.init($("#view").get(0));
         view.login();
+*/
+
+
+
 
 
     });

@@ -1,12 +1,13 @@
 define("cam", ["jquery"], function($){
     var self = this,
-        width = 320,
-        height = 240,
+        width = 400, //320,
+        height = 400, //240,
         video = document.createElement("video"),
         canvas = document.createElement("canvas"),
         context = canvas.getContext("2d"),
         ref_stream = null,
-        started = false;
+        started = false,
+        cams = {};
 
         video.height = height;
         video.width = width;
@@ -45,6 +46,24 @@ define("cam", ["jquery"], function($){
     }
 
     return {
+        init: function(callback){
+            var gotSources = function(sourceInfos) {
+                for (var i = 0; i !== sourceInfos.length; ++i) {
+                    var sourceInfo = sourceInfos[i];
+                    if (sourceInfo.kind === 'video') {
+                        console.log(sourceInfo);
+                        cams[i] = sourceInfo;
+                    }
+                }
+                callback.call(this);
+            };
+
+            if (typeof MediaStreamTrack !== 'undefined'){
+                MediaStreamTrack.getSources(gotSources);
+            }else{
+                callback.call(this);
+            }
+        },
         on: function(event, callback){
             $(self).on(event, callback);
         },
@@ -52,15 +71,33 @@ define("cam", ["jquery"], function($){
             $(self).off(event, callback);
         },
         start: function(){
-            if(navigator.getUserMedia) { 
-                navigator.getUserMedia({video: true, audio: false}, startStream, startStreamFailed); 
-            }else if(navigator.mediaDevices.getUserMedia) { 
-                navigator.mediaDevices.getUserMedia({video: {facingMode: "environment"}, audio: false}).then(startStream).catch(startStreamFailed); 
-            }else if(navigator.webkitGetUserMedia){ 
-                navigator.webkitGetUserMedia({video:true, audio: false}, startStream, startStreamFailed); 
-            }else if(navigator.mozGetUserMedia){ 
-                navigator.mozGetUserMedia({video: true, audio: false}, startStream, startStreamFailed);
-             }
+            if(Object.keys(cams).length){
+                var constraints = {
+                    audio: false,
+                    video: {
+                        facingMode: "environment",
+                        optional: [{sourceId: cams[Object.keys(cams)[Object.keys(cams).length-1]].id}]
+                    }
+                };
+            }else{
+                var constraints = {
+                    audio: false,
+                    video: true
+                };
+                alert("hej");
+            }
+
+            if(navigator.getUserMedia) {
+                navigator.getUserMedia(constraints, startStream, startStreamFailed);
+            }else if(navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia(constraints).then(startStream).catch(startStreamFailed);
+            }else if(navigator.webkitGetUserMedia){
+                navigator.webkitGetUserMedia(constraints, startStream, startStreamFailed);
+            }else if(navigator.mozGetUserMedia){
+                navigator.mozGetUserMedia(constraints, startStream, startStreamFailed);
+            }
+
+
         },
         stop: function(){
             ref_stream.getVideoTracks().forEach(function(stream){
