@@ -5,7 +5,8 @@ define("cam", ["jquery"], function($){
         video = document.createElement("video"),
         canvas = document.createElement("canvas"),
         context = canvas.getContext("2d"),
-        ref_stream = null;
+        ref_stream = null,
+        started = false;
 
         video.height = height;
         video.width = width;
@@ -33,6 +34,10 @@ define("cam", ["jquery"], function($){
     function readFrame() {
         try {
             context.drawImage(video, 0, 0, width, height);
+            if(!started){
+                $(self).trigger("ready");
+            }
+            started = true;
         } catch (e) {
             return false;
         }
@@ -58,7 +63,9 @@ define("cam", ["jquery"], function($){
              }
         },
         stop: function(){
-            ref_stream.getVideoTracks()[0].stop();
+            ref_stream.getVideoTracks().forEach(function(stream){
+                stream.stop();
+            });
         }
     }
 });
