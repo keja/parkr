@@ -5,7 +5,8 @@ require(["./config"], function(){
 
 
         var canvas = $("#cam").get(0),
-            ctx = canvas.getContext('2d');
+            ctx = canvas.getContext('2d'),
+            scanFrame = true; //look for qr-code in frames
 
         qr.init();
         qr.on("decoded", function(event, data){
@@ -25,13 +26,11 @@ require(["./config"], function(){
         });
 
         cam.start();
-        var scanFrame = true; //look for qr-code in frames
         cam.on("capture", function(event, frame){
             ctx.putImageData(frame, 0, 0);
-
             if(scanFrame){
                 qr.scan(canvas.toDataURL('image/png'));
-                scanFrame = false;
+                scanFrame = false; //don't scan more than one frame at the same time (reduce cpu time)
             }
         });
 
