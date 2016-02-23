@@ -1,7 +1,53 @@
 @import "fontawesom/font-awesome.less";
 
 html {
+  width: 100%;
   body {
+    width: 100%;
+    nav {
+      height: 160px;
+      width: 100%;
+      background-color: #000;
+      ul {
+        height: 100%;
+        list-style-type: none;
+        padding: 0;
+        li {
+          float: left;
+          width: 25%;
+          height: 100%;
+          &.active {
+            background-color: #0099DE;
+          }
+          a {
+            font-size: 0;
+            text-decoration: none;
+            &:before {
+              color: #fff;
+              font-family: FontAwesome, serif;
+              font-size: 80pt;
+              text-align: center;
+              line-height: 160px;
+              display: block;
+              height: 100%;
+            }
 
+          }
+          &.car a:before{
+            content: "\f1b9";
+          }
+          &.map a:before{
+            content: "\f041";
+          }
+          &.stats a:before{
+            content: "\f201";
+          }
+          &.settings a:before{
+            content: "\f085";
+          }
+
+        }
+      }
+    }
   }
 }
