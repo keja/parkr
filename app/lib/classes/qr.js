@@ -1,23 +1,26 @@
-//http://www.openalpr.com/demo-image.html
-
-//capture image
-define(["jquery"], function($) {
+define(["jquery", "llqrcode"], function($) {
     var self = this;
+
     return {
-        color: "blue",
-        size: "large",
         on: function(event, callback){
             $(self).on(event, callback);
         },
         off: function(event, callback){
             $(self).off(event, callback);
         },
-        decode: function(image){
-
-        },
         init: function(){
-            //test if canvas is supported
-            //test if webcam is supported
+            qrcode.callback = function(data) {
+                $(self).trigger("decoded", [data]);
+            };
+        },
+        scan: function(image){
+            try{
+                qrcode.decode(image);
+            }catch(error){
+                $(self).trigger("error", [error]);
+            }
+
         }
     }
 });
+

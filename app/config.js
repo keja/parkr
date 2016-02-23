@@ -2,16 +2,17 @@ require.config({
     paths: {
         /* Classes */
         "qr": "lib/classes/qr",
-        "webcam": "lib/classes/webcam",
+        "cam": "lib/classes/cam",
 
         /* Vendors */
-        "jquery": "lib/vendor/jquery/jquery.private",
+        "jquery-private": "lib/vendor/jquery/jquery.private", //v 1.11
+        "jquery": "lib/vendor/jquery/jquery.min", //v 1.11
         "llqrcode": "lib/vendor/llqrcode"
         //"twig": host + "/vendor/twig/twig.min",
     },
     map: {
-        "*": {
-            "jquery": "lib/vendor/jquery/jquery.min"
-        }
+        '*': { 'jquery': 'jquery-private' },
+        'jquery-private': { 'jquery': 'jquery' }
+
     }
 });
