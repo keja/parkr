@@ -21,7 +21,7 @@ define("cam", ["jquery"], function($){
         requestAnimationFrame(draw);
     }
     function startStreamFailed(error){
-        console.error(error);
+        alert(error);
     }
 
     function draw() {
@@ -52,13 +52,27 @@ define("cam", ["jquery"], function($){
                     var sourceInfo = sourceInfos[i];
                     if (sourceInfo.kind === 'video') {
                         console.log(sourceInfo);
-                        cams[i] = sourceInfo;
+                        cams[i] = sourceInfo.id;
                     }
                 }
                 callback.call(this);
             };
-
-            if (typeof MediaStreamTrack !== 'undefined'){
+            if(typeof navigator.mediaDevices !== 'undefined'){
+                navigator.mediaDevices.enumerateDevices()
+                    .then(function(devices) {
+                        devices.forEach(function(device, i) {
+                            console.log(i, device);
+                            if(device.kind == "videoinput"){
+                                cams[i] = device.deviceId;
+                            }
+                            //console.log(device.kind + ": " + device.label +" id = " + device.deviceId);
+                        });
+                        callback.call(this);
+                    })
+                    .catch(function(err) {
+                        alert(err.name + ": " + error.message);
+                    });
+            }else if (typeof MediaStreamTrack !== 'undefined'){
                 MediaStreamTrack.getSources(gotSources);
             }else{
                 callback.call(this);
@@ -72,27 +86,34 @@ define("cam", ["jquery"], function($){
         },
         start: function(){
             if(Object.keys(cams).length){
+
                 var constraints = {
                     audio: false,
                     video: {
-                        facingMode: "environment",
-                        optional: [{sourceId: cams[Object.keys(cams)[Object.keys(cams).length-1]].id}]
+                        deviceId: {exact: cams[Object.keys(cams)[Object.keys(cams).length-1]]},
+                        optional: [{sourceId: cams[Object.keys(cams)[Object.keys(cams).length-1]]}]
                     }
                 };
+
             }else{
                 var constraints = {
                     audio: false,
                     video: true
                 };
-                alert("hej");
+                alert("no cam selection support, using default");
             }
+
+            console.log(constraints);
 
             if(navigator.getUserMedia) {
                 navigator.getUserMedia(constraints, startStream, startStreamFailed);
             }else if(navigator.mediaDevices.getUserMedia) {
                 navigator.mediaDevices.getUserMedia(constraints).then(startStream).catch(startStreamFailed);
-            }else if(navigator.webkitGetUserMedia){
+            }else if(navigator.webkitGetUserMedia){ //THIS IS THE ONE
+
+                //alert("lets do this;" + constraints.video.optional[0].sourceId);
                 navigator.webkitGetUserMedia(constraints, startStream, startStreamFailed);
+
             }else if(navigator.mozGetUserMedia){
                 navigator.mozGetUserMedia(constraints, startStream, startStreamFailed);
             }
