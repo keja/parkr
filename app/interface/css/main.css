@@ -2089,10 +2089,12 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 html body {
   width: 100%;
   height: 100%;
+  overflow: auto;
   margin: 0;
   padding: 0;
   background-image: url("../graphics/bg_blur.jpg");
@@ -2112,11 +2114,11 @@ html body #view {
 }
 html body #view .input-group {
   position: relative;
-  background-color: #fff;
   width: 80%;
   height: 40px;
   margin-left: 10%;
   margin-right: 10%;
+  background-color: #fff;
 }
 html body #view .input-group input,
 html body #view .input-group select {
@@ -2127,7 +2129,7 @@ html body #view .input-group select {
   padding: 0;
   top: 0;
   left: 0;
-  background-color: transparent;
+  background-color: #fff;
   margin-left: 15%;
   font-size: 16px;
 }
@@ -2162,11 +2164,48 @@ html body #view .input-group.button button.cam:before {
   font-size: 21px;
   color: #fff;
 }
+html body #view button.primary {
+  margin-right: auto;
+  margin-left: auto;
+  height: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: auto;
+  text-align: center;
+  display: block;
+  border: 0;
+  background-color: #0099DE;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 16px;
+  position: relative;
+}
+html body #view button.primary:before {
+  width: 40px;
+  height: 40px;
+  content: "";
+  border-radius: 50%;
+  background-color: #0099DE;
+  position: absolute;
+  top: 0;
+  left: -20px;
+}
+html body #view button.primary:after {
+  width: 40px;
+  height: 40px;
+  content: "";
+  border-radius: 50%;
+  background-color: #0099DE;
+  position: absolute;
+  top: 0;
+  right: -20px;
+}
 html body #view #cam {
   position: absolute;
   top: 40px;
   left: 0;
   width: 100%;
+  background-color: #000;
 }
 html body nav {
   height: 53px;
@@ -2275,10 +2314,6 @@ html body #view .stat-group .stat-right span {
   text-align: center;
   font-size: 36px;
 }
-
-
-
-
 html body #view .settings-group {
   position: relative;
   background-color: #fff;
@@ -2287,7 +2322,6 @@ html body #view .settings-group {
   margin-right: 10%;
   font-family: FontAwesome, sans-serif;
 }
-
 html body #view .settings-header {
   position: absolute;
   background-color: #3498DB;
@@ -2296,7 +2330,6 @@ html body #view .settings-header {
   left: 0px;
   top: 0px;
 }
-
 html body #view .settings-group p.settings-header-text {
   font-weight: normal;
   line-height: 0px;
@@ -2304,7 +2337,6 @@ html body #view .settings-group p.settings-header-text {
   font-size: 20px;
   color: #fff;
 }
-
 html body #view .settings-header .fa {
   position: absolute;
   top: 25%;
@@ -2312,7 +2344,6 @@ html body #view .settings-header .fa {
   font-size: 20px;
   color: #fff;
 }
-
 html body #view .settings-header-right {
   position: absolute;
   background-color: #2980B9;
@@ -2321,7 +2352,6 @@ html body #view .settings-header-right {
   right: 0px;
   top: 0px;
 }
-
 html body #view .settings-group button {
   border: 0;
   margin: 0;
@@ -2329,14 +2359,12 @@ html body #view .settings-group button {
   font-size: 0;
   width: 15%;
 }
-
 html body #view button.settings-header-right:before {
   content: "\f067";
   font-family: FontAwesome, sans-serif;
   font-size: 21px;
   color: #fff;
 }
-
 html body #view .settings-header-right .fa {
   position: absolute;
   top: 25%;
@@ -2344,10 +2372,6 @@ html body #view .settings-header-right .fa {
   font-size: 20px;
   color: #fff;
 }
-
-
-
-
 html body #view .settings-deletable {
   position: relative;
   background-color: #fff;
@@ -2357,16 +2381,11 @@ html body #view .settings-deletable {
   top: 40px;
   color: #1F2226;
 }
-
 html body #view .settings-deletable p {
   position: absolute;
   left: 10px;
   top: -4px;
 }
-
-
-
-
 html body #view .settings-button-edit {
   position: absolute;
   background-color: #fff;
@@ -2375,24 +2394,18 @@ html body #view .settings-button-edit {
   right: 15%;
   top: 0px;
 }
-
 html body #view button.settings-button-edit:before {
   content: "\f044";
   font-family: FontAwesome, sans-serif;
   font-size: 21px;
   color: #7F8C8D;
 }
-
 html body #view .settings-button-edit .fa {
   position: absolute;
   top: 25%;
   left: 12px;
   font-size: 20px;
 }
-
-
-
-
 html body #view .settings-button-delete {
   position: absolute;
   background-color: #fff;
@@ -2401,25 +2414,18 @@ html body #view .settings-button-delete {
   right: 0px;
   top: 0px;
 }
-
 html body #view button.settings-button-delete:before {
   content: "\f1f8";
   font-family: FontAwesome, sans-serif;
   font-size: 21px;
   color: #E74C3C;
 }
-
 html body #view .settings-button-delete .fa {
   position: absolute;
   top: 25%;
   left: 12px;
   font-size: 20px;
 }
-
-
-
-
-
 html body #view .settings-button-password {
   position: absolute;
   background-color: #fff;
@@ -2428,25 +2434,21 @@ html body #view .settings-button-password {
   right: 0px;
   top: 0px;
 }
-
 html body #view button.settings-button-password:before {
   content: "\f044";
   font-family: FontAwesome, sans-serif;
   font-size: 21px;
   color: #7F8C8D;
 }
-
 html body #view .settings-button-password .fa {
   position: absolute;
   top: 25%;
   left: 12px;
   font-size: 20px;
 }
-
 .st60 {
   margin-top: 70px;
 }
-
 html body #view .settings-group input,
 html body #view .settings-group select {
   height: 100%;
@@ -2456,6 +2458,7 @@ html body #view .settings-group select {
   padding: 0;
   top: 0;
   left: 0;
-  background-color: transparent;  font-size: 16px;
+  background-color: transparent;
+  font-size: 16px;
   padding-left: 10px;
 }

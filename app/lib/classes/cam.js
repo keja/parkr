@@ -47,11 +47,12 @@ define("cam", ["jquery"], function($){
 
     return {
         init: function(callback){
+            cams = [];
             var gotSources = function(sourceInfos) {
                 for (var i = 0; i !== sourceInfos.length; ++i) {
                     var sourceInfo = sourceInfos[i];
                     if (sourceInfo.kind === 'video') {
-                        console.log(sourceInfo);
+                        //console.log(sourceInfo);
                         cams[i] = sourceInfo.id;
                     }
                 }
@@ -61,7 +62,7 @@ define("cam", ["jquery"], function($){
                 navigator.mediaDevices.enumerateDevices()
                     .then(function(devices) {
                         devices.forEach(function(device, i) {
-                            console.log(i, device);
+                            //console.log(i, device);
                             if(device.kind == "videoinput"){
                                 cams[i] = device.deviceId;
                             }
@@ -90,7 +91,6 @@ define("cam", ["jquery"], function($){
                 constraints = {
                     audio: false,
                     video: {
-                        //deviceId: {exact: cams[Object.keys(cams)[Object.keys(cams).length-1]]},
                         optional: [{ sourceId: cams[Object.keys(cams)[Object.keys(cams).length-1]] }]
                     }
                 };
@@ -101,27 +101,24 @@ define("cam", ["jquery"], function($){
                 };
             }
 
-            console.log(constraints);
 
             if(navigator.getUserMedia) {
                 navigator.getUserMedia(constraints, startStream, startStreamFailed);
             }else if(navigator.mediaDevices.getUserMedia) {
                 navigator.mediaDevices.getUserMedia(constraints).then(startStream).catch(startStreamFailed);
             }else if(navigator.webkitGetUserMedia){
-
-                //alert("lets do this;" + constraints.video.optional[0].sourceId);
                 navigator.webkitGetUserMedia(constraints, startStream, startStreamFailed);
-
             }else if(navigator.mozGetUserMedia){
                 navigator.mozGetUserMedia(constraints, startStream, startStreamFailed);
             }
 
-
         },
         stop: function(){
-            ref_stream.getVideoTracks().forEach(function(stream){
-                stream.stop();
-            });
+            if(ref_stream){
+                ref_stream.getVideoTracks().forEach(function(stream){
+                    stream.stop();
+                });
+            }
         }
     }
 });
