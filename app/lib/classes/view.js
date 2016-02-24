@@ -10,6 +10,14 @@ define(["jquery", "twig"], function($, twig) {
         href: "interface/template/home.twig",
         async: false
     });
+    templates.stats = twig.twig({
+        href: "interface/template/stats.twig",
+        async: false
+    });
+    templates.settings = twig.twig({
+        href: "interface/template/settings.twig",
+        async: false
+    });
 
     return {
         init: function(containerElement){
@@ -22,6 +30,16 @@ define(["jquery", "twig"], function($, twig) {
         },
         home: function(){
             $(container).html(templates.home.render({
+                key: "world"
+            }));
+        },
+        stats: function(){
+            $(container).html(templates.stats.render({
+                key: "world"
+            }));
+        },
+        settings: function(){
+            $(container).html(templates.settings.render({
                 key: "world"
             }));
         }
