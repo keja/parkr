@@ -2114,11 +2114,11 @@ html body #view {
 }
 html body #view .input-group {
   position: relative;
-  background-color: #fff;
   width: 80%;
   height: 40px;
   margin-left: 10%;
   margin-right: 10%;
+  background-color: #fff;
 }
 html body #view .input-group input,
 html body #view .input-group select {
@@ -2129,7 +2129,7 @@ html body #view .input-group select {
   padding: 0;
   top: 0;
   left: 0;
-  background-color: transparent;
+  background-color: #fff;
   margin-left: 15%;
   font-size: 16px;
 }
@@ -2164,11 +2164,48 @@ html body #view .input-group.button button.cam:before {
   font-size: 21px;
   color: #fff;
 }
+html body #view button.primary {
+  margin-right: auto;
+  margin-left: auto;
+  height: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: auto;
+  text-align: center;
+  display: block;
+  border: 0;
+  background-color: #0099DE;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 16px;
+  position: relative;
+}
+html body #view button.primary:before {
+  width: 40px;
+  height: 40px;
+  content: "";
+  border-radius: 50%;
+  background-color: #0099DE;
+  position: absolute;
+  top: 0;
+  left: -20px;
+}
+html body #view button.primary:after {
+  width: 40px;
+  height: 40px;
+  content: "";
+  border-radius: 50%;
+  background-color: #0099DE;
+  position: absolute;
+  top: 0;
+  right: -20px;
+}
 html body #view #cam {
   position: absolute;
   top: 40px;
   left: 0;
   width: 100%;
+  background-color: #000;
 }
 html body nav {
   height: 53px;

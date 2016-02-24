@@ -32,11 +32,12 @@ html {
 
       .input-group {
         position: relative;
-        background-color: #fff;
         width: 80%;
         height: 40px; //120px;
         margin-left: 10%;
         margin-right: 10%;
+        background-color: #fff;
+
         input,select {
           height: 100%;
           width: 84%;
@@ -45,7 +46,7 @@ html {
           padding: 0;
           top: 0;
           left: 0;
-          background-color: transparent;
+          background-color: #fff;
           margin-left: 15%;
           font-size: 16px;
           //-webkit-appearance: none;
@@ -53,6 +54,7 @@ html {
         input {
           padding-left: 7px;
         }
+
         i.fa {
           position: absolute;
           top: 25%;
@@ -84,11 +86,49 @@ html {
           }
         }
       }
+      button.primary {
+        margin-right: auto;
+        margin-left: auto;
+        height: 40px;
+        padding-left: 30px;
+        padding-right: 30px;
+        width: auto;
+        text-align: center;
+        display: block;
+        border: 0;
+        background-color: #0099DE;
+        text-transform: uppercase;
+        color: #fff;
+        font-size: 16px;
+        position: relative;
+
+        &:before {
+          width: 40px;
+          height: 40px;
+          content: "";
+          border-radius: 50%;
+          background-color: #0099DE;
+          position: absolute;
+          top: 0;
+          left: -20px;
+        }
+        &:after {
+          width: 40px;
+          height: 40px;
+          content: "";
+          border-radius: 50%;
+          background-color: #0099DE;
+          position: absolute;
+          top: 0;
+          right: -20px;
+        }
+      }
       #cam {
         position: absolute;
         top: 40px; //120px;
         left: 0;
         width: 100%;
+        background-color: #000;
       }
     }
     //home
