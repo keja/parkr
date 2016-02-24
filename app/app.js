@@ -1,7 +1,7 @@
 require(["./config"], function(){
 
     //MAIN APP
-    require(["jquery", "view", "qr", "cam"], function($, view, qr, cam){
+    require(["jquery", "view", "qr", "cam", "maps"], function($, view, qr, cam, map){
 
         //QR READER
         var scanFrame = true; //look for qr-code in frames
@@ -62,11 +62,24 @@ require(["./config"], function(){
                 });
             }
 
+            //MAP SCREEN
+            else if(page == "map"){
+
+                map.init($("#google_map").get(0), {
+                    lat: 55.403756,
+                    lng: 10.402370
+                });
+
+            }
+
 
 
 
         });
+
+        //delay load
         view.home();
+        //setTimeout(function(){view.home();}, 1500);
 
 
         //NAVIGATION BAR
