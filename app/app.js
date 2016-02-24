@@ -29,7 +29,9 @@ require(["./config"], function(){
 
             //HOME SCREEN
             if(page == "home") {
-                $(document).off("click", "#accessCam"); //make sure no double binds
+                //make sure no double binds
+                $(document).off("click", "#accessCam");
+                cam.off("capture");
 
                 var canvas = $("#cam").get(0),
                     ctx = canvas.getContext('2d');

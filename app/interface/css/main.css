@@ -2084,6 +2084,9 @@
 .fa-percent:before {
   content: "\f295";
 }
+@viewport {
+  orientation: portrait;
+}
 html {
   width: 100%;
   height: 100%;
