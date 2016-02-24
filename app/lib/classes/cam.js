@@ -51,7 +51,7 @@ define("cam", ["jquery"], function($){
                 for (var i = 0; i !== sourceInfos.length; ++i) {
                     var sourceInfo = sourceInfos[i];
                     if (sourceInfo.kind === 'video') {
-                        console.log(sourceInfo);
+                        //console.log(sourceInfo);
                         cams[i] = sourceInfo.id;
                     }
                 }
@@ -101,7 +101,6 @@ define("cam", ["jquery"], function($){
                 };
             }
 
-            console.log(constraints);
 
             if(navigator.getUserMedia) {
                 navigator.getUserMedia(constraints, startStream, startStreamFailed);
