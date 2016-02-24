@@ -2,8 +2,82 @@
 
 html {
   width: 100%;
+  margin: 0;
+  padding: 0;
   body {
     width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: orange;
+
+    * {
+      outline: none;
+    }
+    /* VIEWS */
+    //global rules
+    #view {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      .input-group {
+        position: relative;
+        background-color: #fff;
+        width: 80%;
+        height: 120px;
+        margin-left: 10%;
+        margin-right: 10%;
+        input {
+          height: 100%;
+          width: 83%;
+          border: 0;
+          position: absolute;
+          padding: 0;
+          top: 0;
+          left: 0;
+          background-color: transparent;
+          margin-left: 17%;
+        }
+        i.fa {
+          position: absolute;
+          top: 20%;
+          left: 5%;
+          font-size: 80px;
+        }
+        &.button {
+          input {
+            width: 68%;
+          }
+          button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            border: 0;
+            margin: 0;
+            padding: 0;
+            width: 15%;
+            height: 100%;
+            background-color: #0099DE;
+            font-size: 0;
+            &.cam:before{
+              content: "\f030";
+              font-family: FontAwesome, sans-serif;
+              font-size: 40px;
+              color: #fff;
+
+            }
+          }
+        }
+      }
+      #cam {
+        position: absolute;
+        top: 120px;
+        left: 0;
+        width: 100%;
+      }
+    }
+    //home
+
+
+    /* MENUBAR */
     nav {
       height: 160px;
       width: 100%;
@@ -12,6 +86,7 @@ html {
         height: 100%;
         list-style-type: none;
         padding: 0;
+        margin: 0;
         li {
           float: left;
           width: 25%;
@@ -45,9 +120,15 @@ html {
           &.settings a:before{
             content: "\f085";
           }
+          &.qr a:before{
+            content: "\f029";
+          }
 
         }
       }
     }
   }
+}
+.hidden {
+  visibility: hidden;
 }

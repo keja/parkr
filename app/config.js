@@ -1,4 +1,5 @@
 require.config({
+    urlArgs: "bust=" + (new Date()).getTime(),
     paths: {
         /* Classes */
         "qr": "lib/classes/qr",
