@@ -10,6 +10,10 @@ define(["jquery", "twig"], function($, twig) {
         href: "interface/template/home.twig",
         async: false
     });
+    templates.map = twig.twig({
+        href: "interface/template/map.twig",
+        async: false
+    });
     templates.stats = twig.twig({
         href: "interface/template/stats.twig",
         async: false
@@ -30,6 +34,11 @@ define(["jquery", "twig"], function($, twig) {
         },
         home: function(){
             $(container).html(templates.home.render({
+                key: "world"
+            }));
+        },
+        map: function(){
+            $(container).html(templates.map.render({
                 key: "world"
             }));
         },
