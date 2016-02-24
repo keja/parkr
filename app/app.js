@@ -2,7 +2,7 @@ require(["./config"], function(){
 
     //main app
     require(["jquery", "view", "qr", "cam"], function($, view, qr, cam){
-
+/*
 
         var canvas = $("#cam").get(0),
             ctx = canvas.getContext('2d'),
@@ -44,11 +44,21 @@ require(["./config"], function(){
                 }
             });
         });
-
-        /*
-        view.init($("#view").get(0));
-        view.login();
 */
+
+        view.init($("#view"));
+        view.home();
+
+        $("nav").on("click", "li", function(){
+           var target = $(this).find("a").data("target");
+            try {
+                view[target]();
+                $("nav ul li").removeClass("active");
+                $(this).addClass("active");
+            }catch(e){
+                console.log("View: " + target +", not found");
+            }
+        });
 
 
 

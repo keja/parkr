@@ -2086,14 +2086,18 @@
 }
 html {
   width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
 html body {
   width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
-  background-color: orange;
+  background-image: url("../graphics/bg_blur.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   /* VIEWS */
   /* MENUBAR */
 }
@@ -2112,24 +2116,30 @@ html body #view .input-group {
   margin-left: 10%;
   margin-right: 10%;
 }
-html body #view .input-group input {
+html body #view .input-group input,
+html body #view .input-group select {
   height: 100%;
-  width: 83%;
+  width: 84%;
   border: 0;
   position: absolute;
   padding: 0;
   top: 0;
   left: 0;
   background-color: transparent;
-  margin-left: 17%;
+  margin-left: 15%;
+  font-size: 16px;
+}
+html body #view .input-group input {
+  padding-left: 7px;
 }
 html body #view .input-group i.fa {
   position: absolute;
-  top: 20%;
+  top: 25%;
   left: 5%;
-  font-size: 26px;
+  font-size: 20px;
 }
-html body #view .input-group.button input {
+html body #view .input-group.button input,
+html body #view .input-group.button select {
   width: 68%;
 }
 html body #view .input-group.button button {
@@ -2147,7 +2157,7 @@ html body #view .input-group.button button {
 html body #view .input-group.button button.cam:before {
   content: "\f030";
   font-family: FontAwesome, sans-serif;
-  font-size: 13px;
+  font-size: 21px;
   color: #fff;
 }
 html body #view #cam {
@@ -2160,6 +2170,8 @@ html body nav {
   height: 53px;
   width: 100%;
   background-color: #000;
+  position: fixed;
+  bottom: 0;
 }
 html body nav ul {
   height: 100%;
@@ -2205,4 +2217,10 @@ html body nav ul li.qr a:before {
 }
 .hidden {
   visibility: hidden;
+}
+.st10 {
+  margin-top: 10px;
+}
+.st30 {
+  margin-top: 30px;
 }

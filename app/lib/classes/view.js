@@ -6,6 +6,10 @@ define(["jquery", "twig"], function($, twig) {
         href: "interface/template/login.twig",
         async: false
     });
+    templates.home = twig.twig({
+        href: "interface/template/home.twig",
+        async: false
+    });
 
     return {
         init: function(containerElement){
@@ -13,6 +17,11 @@ define(["jquery", "twig"], function($, twig) {
         },
         login: function(){
             $(container).html(templates.login.render({
+                key: "world"
+            }));
+        },
+        home: function(){
+            $(container).html(templates.home.render({
                 key: "world"
             }));
         }
