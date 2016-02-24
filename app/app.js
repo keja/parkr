@@ -69,6 +69,12 @@ require(["./config"], function(){
                     lat: 55.403756,
                     lng: 10.402370
                 });
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        map.addMarker(0, {lat: position.coords.latitude, lng: position.coords.longitude}, "You are here", "<p>You are here</p>");
+                    });
+                }
+                map.addMarker(1, {lat: 55.403756, lng: 10.402370}, "Your car is here", "<p>Your car are here</p>");
 
             }
 
