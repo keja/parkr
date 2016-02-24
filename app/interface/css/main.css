@@ -2123,6 +2123,12 @@ html body #view .input-group input {
   background-color: transparent;
   margin-left: 17%;
 }
+html body #view .input-group i.fa {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  font-size: 80px;
+}
 html body #view .input-group.button input {
   width: 68%;
 }
@@ -2196,4 +2202,7 @@ html body nav ul li.settings a:before {
 }
 html body nav ul li.qr a:before {
   content: "\f029";
+}
+.hidden {
+  visibility: hidden;
 }

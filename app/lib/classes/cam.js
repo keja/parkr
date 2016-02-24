@@ -85,22 +85,20 @@ define("cam", ["jquery"], function($){
             $(self).off(event, callback);
         },
         start: function(){
+            var constraints = {};
             if(Object.keys(cams).length){
-
-                var constraints = {
+                constraints = {
                     audio: false,
                     video: {
-                        deviceId: {exact: cams[Object.keys(cams)[Object.keys(cams).length-1]]},
-                        optional: [{sourceId: cams[Object.keys(cams)[Object.keys(cams).length-1]]}]
+                        //deviceId: {exact: cams[Object.keys(cams)[Object.keys(cams).length-1]]},
+                        optional: [{ sourceId: cams[Object.keys(cams)[Object.keys(cams).length-1]] }]
                     }
                 };
-
             }else{
-                var constraints = {
+                constraints = {
                     audio: false,
                     video: true
                 };
-                alert("no cam selection support, using default");
             }
 
             console.log(constraints);
@@ -109,7 +107,7 @@ define("cam", ["jquery"], function($){
                 navigator.getUserMedia(constraints, startStream, startStreamFailed);
             }else if(navigator.mediaDevices.getUserMedia) {
                 navigator.mediaDevices.getUserMedia(constraints).then(startStream).catch(startStreamFailed);
-            }else if(navigator.webkitGetUserMedia){ //THIS IS THE ONE
+            }else if(navigator.webkitGetUserMedia){
 
                 //alert("lets do this;" + constraints.video.optional[0].sourceId);
                 navigator.webkitGetUserMedia(constraints, startStream, startStreamFailed);

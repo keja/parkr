@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo</title>
-    <link rel="stylesheet" href="interface/css/main.css">
+    <link rel="stylesheet" href="interface/css/main.css?v2">
 </head>
 <body>
 
-    <script src="lib/vendor/require.js" data-main="app.js"></script>
+   <script src="lib/vendor/require.js" data-main="app.js"></script>
 
 
     <div id="view">
         <div class="input-group button">
+            <i class="fa fa-qrcode"></i>
             <input type="text" id="location_id" placeholder="xxx-xxxx">
-            <button class="cam">Camera</button>
-            <canvas id="cam"></canvas>
+            <button class="cam" id="accessCam">Camera</button>
+            <canvas id="cam" class="hidden"></canvas>
         </div>
     </div>
     <nav>
@@ -25,9 +26,6 @@
             <li class="settings"><a href="#" data-target="settings">Settings</a></li>
         </ul>
     </nav>
-<div id="test" style="background: yellow;"></div>
-<div id="test2" style="background: pink;"></div>
-    <img src="#" id="testimg" alt="" style="border: 2px solid red;">
 
 </body>
 </html>
