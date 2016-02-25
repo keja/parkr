@@ -69,12 +69,33 @@ require(["./config"], function(){
                     lat: 55.403756,
                     lng: 10.402370
                 });
+
+                var icon_me = {
+                    url: '//noviks.dk/app/interface/graphics/icon_me.svg',
+                    size: new google.maps.Size(42, 50),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(21, 50)
+                },
+                icon_car = {
+                    url: '//noviks.dk/app/interface/graphics/icon_car.svg',
+                    size: new google.maps.Size(42, 50),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(21, 50)
+                },
+                icon_p = {
+                    url: '//noviks.dk/app/interface/graphics/icon_space.svg',
+                    size: new google.maps.Size(21, 25),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(10.5, 25)
+                };
+
+
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position) {
-                        map.addMarker(0, {lat: position.coords.latitude, lng: position.coords.longitude}, "You are here", "<p>You are here</p>");
+                        map.addMarker(0, {lat: position.coords.latitude, lng: position.coords.longitude}, "You are here", "<p>You are here</p>", icon_me);
                     });
                 }
-                map.addMarker(1, {lat: 55.403756, lng: 10.402370}, "Your car is here", "<p>Your car are here</p>");
+                map.addMarker(1, {lat: 55.403756, lng: 10.402370}, "Your car is here", "<p>Your car are here</p>", icon_car);
 
             }
 
