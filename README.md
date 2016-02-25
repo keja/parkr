@@ -16,4 +16,4 @@ Parkr was created by Team 4, a mix of 1st and 2nd semester web development stude
 * Reinis Ļaudansks
 
 ##IMPORTANT
-in order to use the demo you need to turst our self signed ssl certificate, visit: (https://188.166.1.167)[https://188.166.1.167], and choose to continue to the site. - if this step is not completed all connection from the web app will not get send to the server.
+in order to use the demo you need to turst our self signed ssl certificate, visit: https://188.166.1.167, and choose to continue to the site. - if this step is not completed all connection from the web app will not get send to the server.
