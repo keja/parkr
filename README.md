@@ -3,7 +3,7 @@
 ##Parkr
 Parkr is an innovative web-app that aims to simplify and remove the pain from parking in Odense, by removing such ancient concepts like "paper tickets" and "setting the parking disc".
 
-Made for the Spring 2016 EAL Hackaton project where we had 4days to make a prototype
+Made for the Spring 2016 EAL Hackathon project where we had 4days to make a prototype
 
 ##Team
 Parkr was created by Team 4, a mix of 1st and 2nd semester web development students. Team members include (in alphabetical order):
