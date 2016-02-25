@@ -13,7 +13,7 @@ Before you can use our prototype, you need to trust our self signed SSL certific
 * Choose to continue to the site
 * You might have to tap "Advanced" or something like that to be able to do this
 
-If this step is not completed all connection from the web-app will not get send to the server. Thank you.
+If this step is not completed all connection from the web-app will not get sent to the server. Thank you.
 
 Now you should be good to go! Visit https://noviks.dk/app/index.html to try our prototype.
 
