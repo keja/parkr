@@ -1,6 +1,8 @@
-define(["jquery", "twig"], function($, twig) {
+define(["jquery", "twig", "datastore", "cookies"], function($, twig, datastore, cookie) {
     var container,
         templates = {};
+
+    datastore.setURI("https://188.166.1.167/api/v1/");
 
     templates.login = twig.twig({
         href: "interface/template/login.twig",
@@ -27,7 +29,7 @@ define(["jquery", "twig"], function($, twig) {
         $(container).trigger("change", [page]).data("active", page);
     };
 
-    return {
+    var r = {
         init: function(containerElement, callback){
             container = containerElement;
             if(callback){
@@ -38,34 +40,87 @@ define(["jquery", "twig"], function($, twig) {
             $(container).on(event, callback);
         },
         login: function(){
-            $(container).html(templates.login.render({
-                key: "world"
-            }));
-            cb("login");
+            var userid = cookie.get("login");
+            if(userid){
+                datastore.setUserID(userid); //yup it is that insecure, but hey its a prototype #DealWithIt
+                r.home();
+            }else{
+                $(container).html(templates.login.render());
+                cb("login");
+            }
         },
         home: function(){
-            $(container).html(templates.home.render({
-                key: "world"
-            }));
-            cb("home");
+            var awaitCars = $.Deferred();
+            var awaitCards = $.Deferred();
+
+            datastore.car.getAll(function(cars){
+                awaitCars.resolve(cars);
+            });
+            datastore.creditcard.getAll(function(cards){
+                awaitCards.resolve(cards);
+            });
+
+            $.when(awaitCars, awaitCards).done(function(cars, cards) {
+                $(container).html(templates.home.render({
+                    cars: cars,
+                    cards: cards
+                }));
+                cb("home");
+            });
         },
         map: function(){
-            $(container).html(templates.map.render({
-                key: "world"
-            }));
-            cb("map");
+            var awaitParkedCars = $.Deferred();
+            datastore.car.getParked(function(locations){
+                awaitParkedCars.resolve(locations);
+            });
+            $.when(awaitParkedCars).done(function(cars){
+                console.log(cars);
+                $(container).html(templates.map.render({
+                    cars: cars
+                }));
+                cb("map");
+            });
         },
         stats: function(){
-            $(container).html(templates.stats.render({
-                key: "world"
-            }));
-            cb("stats");
+            var awaitStatsInactive = $.Deferred();
+            var awaitStatsActive = $.Deferred();
+
+            datastore.car.getHistory(function(entities){
+                awaitStatsInactive.resolve(entities);
+            });
+            datastore.car.getParked(function(entities){
+                awaitStatsActive.resolve(entities);
+            });
+            $.when(awaitStatsActive, awaitStatsInactive).done(function(active, inactive) {
+                console.log(active, inactive);
+                $(container).html(templates.stats.render({
+                    active: active,
+                    inactive: inactive
+                }));
+                cb("stats");
+            });
         },
         settings: function(){
-            $(container).html(templates.settings.render({
-                key: "world"
-            }));
-            cb("settings");
+            var awaitCars = $.Deferred();
+            var awaitCards = $.Deferred();
+
+            datastore.car.getAll(function(cars){
+                awaitCars.resolve(cars);
+            });
+            datastore.creditcard.getAll(function(cards){
+                awaitCards.resolve(cards);
+            });
+
+            $.when(awaitCars, awaitCards).done(function(cars, cards) {
+                $(container).html(templates.settings.render({
+                    cars: cars,
+                    cards: cards
+                }));
+                cb("settings");
+            });
+
+
         }
-    }
+    };
+    return r;
 });

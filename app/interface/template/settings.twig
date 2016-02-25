@@ -4,21 +4,17 @@
         <p class="settings-header-text">Your cars</p>
         <button class="settings-header-right" id="addCar"></button>
     </div>
+    {% for car in cars %}
     <div class="settings-deletable">
-        <p>AB 12 345</p>
+        <p>{{ car.title }}</p>
         <button class="settings-button-edit" id="editCar"></button>
         <button class="settings-button-delete" id="deleteCar"></button>
     </div>
+    {% else %}
     <div class="settings-deletable">
-        <p>AB 12 345</p>
-        <button class="settings-button-edit" id="editCar"></button>
-        <button class="settings-button-delete" id="deleteCar"></button>
+        <p>No cars added yet</p>
     </div>
-    <div class="settings-deletable">
-        <p>AB 12 345</p>
-        <button class="settings-button-edit" id="editCar"></button>
-        <button class="settings-button-delete" id="deleteCar"></button>
-    </div>
+    {% endfor %}
 </div>
 
 <div class="settings-group st60">
@@ -27,16 +23,17 @@
         <p class="settings-header-text">Your credit cards</p>
         <button class="settings-header-right" id="addCard"></button>
     </div>
-    <div class="settings-deletable">
-        <p>**** **** **** **XX</p>
-        <button class="settings-button-edit" id="editCard"></button>
-        <button class="settings-button-delete" id="deleteCard"></button>
-    </div>
-    <div class="settings-deletable">
-        <p>**** **** **** **XX</p>
-        <button class="settings-button-edit" id="editCard"></button>
-        <button class="settings-button-delete" id="deleteCard"></button>
-    </div>
+    {% for card in cards %}
+        <div class="settings-deletable">
+            <p>**** **** **** {{ card.cardnumber | slice(15, 4) }}</p>
+            <button class="settings-button-edit" id="editCard"></button>
+            <button class="settings-button-delete" id="deleteCard"></button>
+        </div>
+    {% else %}
+        <div class="settings-deletable">
+            <p>No credit cards added yet</p>
+        </div>
+    {% endfor %}
 </div>
 
 <div class="settings-group st60">

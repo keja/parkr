@@ -6,21 +6,44 @@
 </div>
 <div class="input-group" style="margin-top: 150px;">
     <i class="fa fa-clock-o"></i>
-    <select name="">
-        <option value="hes">Duration</option>
+    <select id="duration">
+        {% for h in range(0, 10, 1) %}
+            {% for m in range(0, 45, 15) %}
+                {% set h_title = "Hour" %}
+                {% set m_title = "Minutes" %}
+                {% if h > 1 %}
+                    {% set h_title = h_title ~ "s" %}
+                {% endif %}
+
+                {% set human_time = m > 0 ? m ~ " " ~ m_title : "" %}
+                {% if h > 0 %}
+                    {% set human_time = h ~ " " ~ h_title ~ " " ~ human_time %}
+                {% endif %}
+                {% set computer_time = (h*60) + m %}
+                {% if computer_time > 0 %} {# loop starts at 0, skip first one.. #}
+                    <option value="{{ computer_time }}">{{ human_time }}</option>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
     </select>
 </div>
 <div class="input-group st30">
     <i class="fa fa-automobile"></i>
-    <select name="">
-        <option value="hes">Car</option>
+    <select id="car_id">
+        {% for car in cars %}
+        <option value="{{ car.id }}">{{ car.title }}</option>
+        {% else %}
+            <option value="0" disabled>No cars - go to settings</option>
+        {% endfor %}
     </select>
 </div>
 <div class="input-group st30">
     <i class="fa fa-credit-card"></i>
     <select name="">
-        <option value="hes">Payment option</option>
+        {% for card in cards %}
+            <option value="{{ card.id }}">**** **** **** {{ card.cardnumber | slice(15, 4) }}</option>
+        {% endfor %}
     </select>
 </div>
 
-    <button class="st30 primary" onclick="alert('hej')">Park</button>
+    <button class="st30 primary" id="btn_park">Park</button>

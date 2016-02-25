@@ -1,13 +1,54 @@
-define(["jquery"], function(){
+define(["jquery", "cookies"], function($, cookie){
 
-    var resource_uri = "";
+    var resource_uri = "",
+        user_id = cookie.get("login") || 0;
+
+    $(document).ajaxError(function(err, xhr) {
+        if(err.statusText == "error"){
+            window.location.href = " https://188.166.1.167";
+        }
+    });
 
     var car = {
         getByID: function(){
 
         },
-        getAll: function(){
-
+        getAll: function(callback){
+            $.ajax({
+                url: resource_uri + "user/" + user_id + "/vehicles",
+                method: "GET",
+                type: "json",
+                success: callback
+            });
+        },
+        getParked: function(callback){
+            $.ajax({
+                url: resource_uri + "user/" + user_id + "/active",
+                method: "GET",
+                type: "json",
+                success: callback
+            });
+        },
+        getHistory: function(callback){
+            $.ajax({
+                url: resource_uri + "user/" + user_id + "/history",
+                method: "GET",
+                type: "json",
+                success: callback
+            });
+        },
+        park: function(location_id, vehicle_id, duration, callback){
+            $.ajax({
+                url: resource_uri + "log",
+                method: "post",
+                success: callback,
+                data: {
+                    "location_id": location_id,
+                    "owner_id": user_id,
+                    "vehicle_id": vehicle_id,
+                    "expires": new Date().getTime() + (duration * 60)
+                }
+            });
         },
         edit: function(){
 
@@ -20,9 +61,13 @@ define(["jquery"], function(){
         }
     };
 
-    var creditcard = {
-        getAll: function(){
-
+    var creditcard = { /* no backend for this, as there is no payment gateway, so no need to store this information */
+        getAll: function(callback){
+            var result = [
+                {id: 1, cardnumber: "1234-5678-9012-7644"},
+                {id: 2, cardnumber: "5678-1234-1234-5678"}
+            ];
+            callback.call(this, result);
         },
         edit: function(){
 
@@ -36,14 +81,47 @@ define(["jquery"], function(){
     };
 
     var user = {
-        login: function(){
-
+        login: function(username, password, callback){
+            $.ajax({
+                url: resource_uri + "user/login",
+                method: "POST",
+                type: "json",
+                success: function(result, text, xhr){
+                    if(xhr.status != 401 && xhr.status != 500){
+                        callback.call(this, result);
+                    }else{
+                        callback.call(this, {
+                            id: false
+                        });
+                    }
+                },
+                error: function(){
+                    callback.call(this, {
+                       id: false
+                    });
+                },
+                data: {
+                    email: username + "@dummy.mail",
+                    password: password
+                }
+            });
         },
         logout: function(){
-
+            cookie.delete("login");
         },
-        create: function(){
-
+        create: function(username, password, callback){
+            $.ajax({
+                url: resource_uri + "user",
+                method: "POST",
+                type: "json",
+                success: callback,
+                data: {
+                    name: username,
+                    email: username + "@dummy.mail",
+                    username: username,
+                    password: password
+                }
+            });
         },
         getID: function(){
 
@@ -59,9 +137,14 @@ define(["jquery"], function(){
         }
     };
 
+
     return {
         setURI: function(uri){
             resource_uri = uri;
+        },
+        setUserID: function(userid){
+            //user_id = userid;
+            //cookie.set("login", userid, 250);
         },
         car: car,
         creditcard: creditcard,

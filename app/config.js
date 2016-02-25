@@ -7,6 +7,7 @@ require.config({
         "view": "lib/classes/view",
         "maps": "lib/classes/maps",
         "datastore": "lib/classes/datastore",
+        "cookies": "lib/classes/cookies",
 
         /* Vendors */
         "jquery-private": "lib/vendor/jquery/jquery.private", //v 1.11

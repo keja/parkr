@@ -1,7 +1,10 @@
 require(["./config"], function(){
 
     //MAIN APP
-    require(["jquery", "view", "qr", "cam", "maps"], function($, view, qr, cam, map){
+    require(["jquery", "view", "qr", "cam", "maps", "datastore"], function($, view, qr, cam, map, datastore){
+
+        datastore.setURI("https://188.166.1.167/api/v1/");
+
 
         //QR READER
         var scanFrame = true; //look for qr-code in frames
@@ -31,6 +34,7 @@ require(["./config"], function(){
             if(page == "home") {
                 //make sure no double binds
                 $(document).off("click", "#accessCam");
+                $(document).off("click", "#btn_park");
                 cam.off("capture");
 
                 var canvas = $("#cam").get(0),
@@ -60,6 +64,50 @@ require(["./config"], function(){
                         }
                     });
                 });
+
+                $(document).on("click", "#btn_park", function(){
+                    var location_id = $("#location_id").val(),
+                        vehicle_id = $("#car_id").val(),
+                        duration = $("#duration").val();
+
+                    datastore.car.park(location_id, vehicle_id, duration, function(result){
+                        console.log(result);
+                    });
+                });
+            }
+
+            //LOGIN / CREATE USER SCREEN
+            else if(page == "login"){
+                $("#login_btn").on("click", function(){
+                    var username = $("#form_login_username").val(),
+                        password = $("#form_login_password").val();
+                    datastore.user.login(username, password, function(result){
+                        if(result && result.id){
+                            datastore.setUserID(result.id);
+                            view.home();
+                        }else{
+                            alert("Failed to login, try again");
+                        }
+                    });
+                });
+                $("#create_account").on("click", function(){
+                    var username = $("#form_create_username").val(),
+                        password = $("#form_create_password").val(),
+                        passw0rd = $("#form_create_password_again").val();
+
+                    if(username.length && password.length && (passw0rd == password)){
+                        datastore.user.create(username, password, function(result){
+                            if(result && result.id){
+                                datastore.setUserID(result.id);
+                                view.home();
+                            }
+                        });
+                    }else{
+                        alert("form is invalid");
+                    }
+
+                });
+
             }
 
             //MAP SCREEN
@@ -99,13 +147,10 @@ require(["./config"], function(){
 
             }
 
-
-
-
         });
 
         //delay load
-        view.home();
+        view.login();
         //setTimeout(function(){view.home();}, 1500);
 
 
@@ -117,6 +162,7 @@ require(["./config"], function(){
                 $("nav ul li").removeClass("active");
                 $(this).addClass("active");
             }catch(e){
+                console.log(view);
                 console.log("View: " + target + ", not found");
             }
         });
