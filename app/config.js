@@ -6,6 +6,7 @@ require.config({
         "cam": "lib/classes/cam",
         "view": "lib/classes/view",
         "maps": "lib/classes/maps",
+        "datastore": "lib/classes/datastore",
 
         /* Vendors */
         "jquery-private": "lib/vendor/jquery/jquery.private", //v 1.11
