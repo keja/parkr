@@ -9,9 +9,9 @@ Made for the Spring 2016 EAL Hackathon project where we had 4 days to make a pro
 Our Parkr prototype was developed with Android as the target platform. Please use Chrome or Firefox on an Android phone when visiting our prototype.
 
 Before you can use our prototype, you need to trust our self signed SSL certificate:
-+ Visit https://188.166.1.167 
-+ Tap "Advanced"
-+ Choose to continue to the site
+* Visit https://188.166.1.167 
+* Choose to continue to the site
+* You might have to tap "Advanced" or something like that to be able to do this
 
 If this step is not completed all connection from the web-app will not get send to the server. Thank you.
 
