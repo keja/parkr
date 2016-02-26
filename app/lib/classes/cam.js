@@ -7,7 +7,8 @@ define("cam", ["jquery"], function($){
         context = canvas.getContext("2d"),
         ref_stream = null,
         started = false,
-        cams = {};
+        cams = {},
+        req_id = 0;
 
         video.height = height;
         video.width = width;
@@ -18,7 +19,7 @@ define("cam", ["jquery"], function($){
         video.src = URL.createObjectURL(stream);
         video.play();
         ref_stream = stream;
-        requestAnimationFrame(draw);
+        req_id = requestAnimationFrame(draw);
     }
     function startStreamFailed(error){
         alert(error);
@@ -29,7 +30,7 @@ define("cam", ["jquery"], function($){
         if (frame) {
             $(self).trigger("capture",[frame]);
         }
-        requestAnimationFrame(draw);
+        req_id = requestAnimationFrame(draw);
     }
 
     function readFrame() {
@@ -119,6 +120,7 @@ define("cam", ["jquery"], function($){
                     stream.stop();
                 });
             }
+            cancelAnimationFrame(req_id);
         }
     }
 });

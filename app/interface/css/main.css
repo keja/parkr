@@ -2204,7 +2204,8 @@ html body #view button.primary:after {
   right: -20px;
 }
 html body #view a,
-html body #view td {
+html body #view td,
+html body #view div {
   font-family: FontAwesome, sans-serif;
 }
 html body #view #cam {

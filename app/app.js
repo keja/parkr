@@ -32,6 +32,16 @@ require(["./config"], function(){
 
             //HOME SCREEN
             if(page == "home") {
+
+                $("#btn_close_parking_ended").on("click", function(){
+                   view.home();
+                });
+
+                $("#btn_end_parking").on("click", function(){
+                    $("#parkingEnded").removeClass("hidden");
+                    $("#parkScreen, #parkedScreen").addClass("hidden");
+                });
+
                 $("nav").removeClass("hidden");
 
                 //check if already parked
