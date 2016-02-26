@@ -32,6 +32,8 @@ require(["./config"], function(){
 
             //HOME SCREEN
             if(page == "home") {
+                $("nav").removeClass("hidden");
+
                 //check if already parked
                 var checkIfParked = $.Deferred();
                 datastore.car.getParked(function(parked){
@@ -126,7 +128,18 @@ require(["./config"], function(){
                     }else{
                         alert("form is invalid");
                     }
-
+                });
+                $("#register").on("click", function(){
+                    $("#login-page, #login-regi-page").hide();
+                    $("#register-page").show();
+                });
+                $("#register-page .back, #login-page .back").on("click", function(){
+                    $("#login-regi-page").show();
+                    $("#login-page, #register-page").hide();
+                });
+                $("#login").on("click", function(){
+                    $("#login-page").show();
+                    $("#register-page, #login-regi-page").hide();
                 });
 
             }
@@ -165,10 +178,18 @@ require(["./config"], function(){
                     });
                 }
                 datastore.car.getParked(function(result){
-                   if(result){ //TODO: add lat & lng from db, when added to db.
+                   if(result.length){ //TODO: add lat & lng from db, when added to db.
                        map.addMarker(1, {lat: 55.403756, lng: 10.402370}, "Your car is here", "<p>Your car are here</p>", icon_car);
                    }
                 });
+                datastore.location.getAll(function(locations){
+                    if(locations.length){
+                        locations.forEach(function(location, index){
+                            console.log(location);
+                            map.addMarker(5+index, {lat: location.lat, lng: location.long}, "you can park here", "", icon_p);
+                        })
+                    }
+                })
 
             }
 
@@ -188,6 +209,15 @@ require(["./config"], function(){
                            }
                         });
                     }
+                });
+
+                $("#btn_logout").on("click", function(){
+                   datastore.user.logout(function(){
+                       view.login();
+                       $("#login-page").show();
+                       $("#register-page, #login-regi-page").hide();
+                       $("nav").addClass("hidden");
+                   });
                 });
 
             }

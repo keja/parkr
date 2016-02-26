@@ -121,8 +121,9 @@ define(["jquery", "cookies"], function($, cookie){
                 }
             });
         },
-        logout: function(){
+        logout: function(callback){
             cookie.delete("login");
+            callback.call(this);
         },
         create: function(username, password, callback){
             $.ajax({
@@ -147,8 +148,13 @@ define(["jquery", "cookies"], function($, cookie){
         getByID: function(){
 
         },
-        getAll: function(){
-
+        getAll: function(callback){
+            $.ajax({
+                url: resource_uri + "locations",
+                method: "GET",
+                type: "json",
+                success: callback
+            });
         }
     };
 

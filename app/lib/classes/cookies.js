@@ -17,7 +17,7 @@ define("cookies", function () {
             return false;
         },
         delete: function (cname) {
-            document.cookie = cname + "=; expires=Thu, 1 Jan 2000 12:00:00 UTC";
+            document.cookie = cname + "=; expires=Thu, 1 Jan 2000 12:00:00 UTC; path=/";
         }
     };
 });
