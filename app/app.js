@@ -198,9 +198,10 @@ require(["./config"], function(){
                 }
                 datastore.car.getParked(function(result){
                    if(result.length){ //TODO: add lat & lng from db, when added to db.
-                       map.addMarker(1, {lat: 55.403756, lng: 10.402370}, "Your car is here", "<p>Your car are here</p>", icon_car);
+                       map.addMarker(1, {lat: result[0].lat || 55.403756, lng:  result[0].long || 10.402370}, "Your car is here", "<p>Your car is here</p>", icon_car);
                    }
                 });
+                /*
                 datastore.location.getAll(function(locations){
                     if(locations.length){
                         locations.forEach(function(location, index){
@@ -208,7 +209,7 @@ require(["./config"], function(){
                         })
                     }
                 })
-
+                */
             }
 
             //SETTINGS SCREEN
