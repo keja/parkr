@@ -41,8 +41,16 @@ require(["./config"], function(){
                 });
                 $.when(checkIfParked).done(function(parked) {
                     if(parked.length){
+
+                        $("#parked_car").html(parked[0].title);
+                        $("#parked_location").html(parked[0].zone);
+                        $("#parked_from").html(parked[0].created_at);
+                        $("#parked_to").html(parked[0].expires);
+                        $("#parked_rate").html(parked[0].price + " DKK");
+
                         $("#parkScreen").addClass("hidden");
                         $("#parkedScreen").removeClass("hidden");
+
                         return;
                     }
 
