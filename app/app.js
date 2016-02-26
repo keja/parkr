@@ -83,7 +83,8 @@ require(["./config"], function(){
                     });
 
                     $(document).on("click", "#btn_park", function () {
-                        var location_id = $("#location_id").val(),
+                        var full_id = $("#location_id").val().toString().split("-");
+                        var location_id = full_id[full_id.length > 0 ? full_id.length -1 : 0],
                             vehicle_id = $("#car_id").val(),
                             duration = $("#duration").val();
 

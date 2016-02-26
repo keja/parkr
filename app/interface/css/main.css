@@ -2203,7 +2203,8 @@ html body #view button.primary:after {
   top: 0;
   right: -20px;
 }
-html body #view a {
+html body #view a,
+html body #view td {
   font-family: FontAwesome, sans-serif;
 }
 html body #view #cam {
