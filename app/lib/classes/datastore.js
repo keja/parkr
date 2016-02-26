@@ -158,8 +158,8 @@ define(["jquery", "cookies"], function($, cookie){
             resource_uri = uri;
         },
         setUserID: function(userid){
-            //user_id = userid;
-            //cookie.set("login", userid, 250);
+            user_id = userid;
+            cookie.set("login", userid, 250);
         },
         car: car,
         creditcard: creditcard,
