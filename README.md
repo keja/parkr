@@ -31,6 +31,9 @@ If this step is not completed all connection from the web-app will not get sent 
 
 For any subsequnt visits you should be able to simply use this link: https://noviks.dk/app/
 
+##Presentation
+See our presentation here: https://noviks.dk/app/presentation/
+
 ##Team
 Parkr was created by Team 4, a mix of 1st and 2nd semester web development students. Team members include (in alphabetical order):
 
