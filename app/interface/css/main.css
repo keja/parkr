@@ -2210,6 +2210,10 @@ html body #view #cam {
   width: 100%;
   background-color: #000;
 }
+html body #view #parkScreen.hidden,
+html body #view #parkedScreen.hidden {
+  display: none;
+}
 html body nav {
   height: 53px;
   width: 100%;

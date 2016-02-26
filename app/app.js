@@ -32,46 +32,67 @@ require(["./config"], function(){
 
             //HOME SCREEN
             if(page == "home") {
-                //make sure no double binds
-                $(document).off("click", "#accessCam");
-                $(document).off("click", "#btn_park");
-                cam.off("capture");
-
-                var canvas = $("#cam").get(0),
-                    ctx = canvas.getContext('2d');
-
-                cam.init(function() {
-                    $(document).on("click", "#accessCam", function(){
-
-                        if($("#cam:not(.hidden)").length){ //cam is running, stop it
-                            $("#cam").addClass("hidden");
-                            cam.stop();
-                            scanFrame = true;
-                        }else{
-                            $("#cam").removeClass("hidden");
-                            cam.start();
-                            scanFrame = true;
-                        }
-                    });
-                    cam.on("capture", function (event, frame) {
-                        ctx.putImageData(frame, 0, 0);
-                        if (scanFrame) {
-                            var img = canvas.toDataURL('image/png');
-                            if (img) {
-                                qr.scan(img);
-                            }
-                            scanFrame = false; //don't scan more than one frame at the same time (reduce cpu time)
-                        }
-                    });
+                //check if already parked
+                var checkIfParked = $.Deferred();
+                datastore.car.getParked(function(parked){
+                    checkIfParked.resolve(parked);
                 });
+                $.when(checkIfParked).done(function(parked) {
+                    if(parked.length){
+                        $("#parkScreen").addClass("hidden");
+                        $("#parkedScreen").removeClass("hidden");
+                        return;
+                    }
 
-                $(document).on("click", "#btn_park", function(){
-                    var location_id = $("#location_id").val(),
-                        vehicle_id = $("#car_id").val(),
-                        duration = $("#duration").val();
+                    $("#parkScreen").removeClass("hidden");
+                    $("#parkedScreen").addClass("hidden");
 
-                    datastore.car.park(location_id, vehicle_id, duration, function(result){
-                        console.log(result);
+                    //make sure no double binds
+                    $(document).off("click", "#accessCam");
+                    $(document).off("click", "#btn_park");
+                    cam.off("capture");
+
+                    var canvas = $("#cam").get(0),
+                        ctx = canvas.getContext('2d');
+
+                    cam.init(function () {
+                        $(document).on("click", "#accessCam", function () {
+
+                            if ($("#cam:not(.hidden)").length) { //cam is running, stop it
+                                $("#cam").addClass("hidden");
+                                cam.stop();
+                                scanFrame = true;
+                            } else {
+                                $("#cam").removeClass("hidden");
+                                cam.start();
+                                scanFrame = true;
+                            }
+                        });
+                        cam.on("capture", function (event, frame) {
+                            ctx.putImageData(frame, 0, 0);
+                            if (scanFrame) {
+                                var img = canvas.toDataURL('image/png');
+                                if (img) {
+                                    qr.scan(img);
+                                }
+                                scanFrame = false; //don't scan more than one frame at the same time (reduce cpu time)
+                            }
+                        });
+                    });
+
+                    $(document).on("click", "#btn_park", function () {
+                        var location_id = $("#location_id").val(),
+                            vehicle_id = $("#car_id").val(),
+                            duration = $("#duration").val();
+
+                        datastore.car.park(location_id, vehicle_id, duration, function (result) {
+                            if (result && result.created_at) {
+                                view.home();
+                            } else {
+                                alert("You can't park there.");
+                            }
+                        });
+
                     });
                 });
             }
@@ -147,11 +168,30 @@ require(["./config"], function(){
 
             }
 
+            //SETTINGS SCREEN
+            else if(page == "settings"){
+
+                $(document).off("click", "#addCar");
+                $(document).on("click", "#addCar", function(){
+                    var plate = prompt("Licence plate");
+                    var title = prompt("Short description of car");
+                    if(plate && title){
+                        datastore.car.add(title, plate, function(result){
+                           if(result){
+                               view.settings();
+                           }else{
+                               alert("failed save create car");
+                           }
+                        });
+                    }
+                });
+
+            }
+
+
         });
 
-        //delay load
         view.login();
-        //setTimeout(function(){view.home();}, 1500);
 
 
         //NAVIGATION BAR

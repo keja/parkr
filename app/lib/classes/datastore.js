@@ -40,21 +40,36 @@ define(["jquery", "cookies"], function($, cookie){
         park: function(location_id, vehicle_id, duration, callback){
             $.ajax({
                 url: resource_uri + "log",
-                method: "post",
+                method: "POST",
                 success: callback,
+                error: function(){
+                    callback.call(this, {
+                        created_at: false
+                    });
+                },
                 data: {
                     "location_id": location_id,
                     "owner_id": user_id,
                     "vehicle_id": vehicle_id,
-                    "expires": new Date().getTime() + (duration * 60)
+                    "expires": parseInt(new Date().getTime() / 1000)  + (parseInt(duration) * 60)
                 }
             });
         },
         edit: function(){
 
         },
-        add: function(){
-
+        add: function(title, plate, callback){
+            $.ajax({
+                url: resource_uri + "vehicle",
+                method: "POST",
+                type: "json",
+                success: callback,
+                data: {
+                    owner_id: user_id,
+                    plate: plate,
+                    title: title
+                }
+            });
         },
         remove: function(){
 
