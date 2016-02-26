@@ -92,7 +92,6 @@ define(["jquery", "twig", "datastore", "cookies"], function($, twig, datastore, 
                 awaitStatsActive.resolve(entities);
             });
             $.when(awaitStatsActive, awaitStatsInactive).done(function(active, inactive) {
-                console.log(active, inactive);
                 $(container).html(templates.stats.render({
                     active: active,
                     inactive: inactive

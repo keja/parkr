@@ -2203,6 +2203,9 @@ html body #view button.primary:after {
   top: 0;
   right: -20px;
 }
+html body #view a {
+  font-family: FontAwesome, sans-serif;
+}
 html body #view #cam {
   position: absolute;
   top: 40px;

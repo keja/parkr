@@ -185,7 +185,6 @@ require(["./config"], function(){
                 datastore.location.getAll(function(locations){
                     if(locations.length){
                         locations.forEach(function(location, index){
-                            console.log(location);
                             map.addMarker(5+index, {lat: location.lat, lng: location.long}, "you can park here", "", icon_p);
                         })
                     }
