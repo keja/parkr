@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Parkr Presentation</title>
+  <meta name="theme-color" content="#1F1F1F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="graphics/favicon.png" type="image/png" />
+</head>
+
+
+
+<body>
+<div class="superwrapper">
+
+<!-- Slide buttons 
+<div id="mright" onkeydown="marginRight()">Right</div>
+<div id="mleft" onkeyup="marginLeft()">Left</div>
+-->
+
+
+
+<!-- Phone -->
+<div id="pre-wrapper">
+
+<div class="slide" style="margin-left: 0px">
+  <img src="graphics/parkr_logo.svg" alt="Parkr logo" width="300">
+  <p>The innovative parking web-app</p>
+</div>
+
+<div class="slide" style="margin-left: 2000px">
+  <h1>Group 4</h1>
+  <p>Anders, Bjørn, Kenneth, Kostikas, Novik and Reinis</p>
+  <p>4x 1st sem students</p>
+  <p>2x 2nd sem students</p>
+</div>
+
+<div class="slide" style="margin-left: 4000px">
+  <h1>The idea</h1>
+  <p>Web-app for making it easier to pay for parking in Odense</p>
+</div>
+
+<div class="slide" style="margin-left: 6000px">
+  <h1>How it works</h1>
+  <p>• Scan QR code, or enter the zone and parking id<br>(located in front of car)</p>
+  <p>• Select duration, car and creditcard</p>
+  <p>• Press park</p>
+</div>
+
+<div class="slide" style="margin-left: 8000px">
+  &nbsp;
+</div>
+
+<div class="slide" style="margin-left: 10000px">
+  <h1>The technologies</h1>
+  <p>Backend: Lumen based REST API (PHP)</p>
+  <p>Frontend: Require.js, TWIG, jQuery and LESS (JavaScript)</p>
+</div>
+
+<div class="slide" style="margin-left: 12000px">
+  <img src="graphics/parkr_logo.svg" alt="Parkr logo" width="300">
+  <p>Thanks you for your time</p>
+  <p>Questions?</p>
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+<!-- Phone -->
+<div id="wrapper">
+  <div class="phone view_1" id="phone_1">
+    <iframe src="https://noviks.dk/app/" id="frame_1"></iframe>
+  </div>
+</div>
+
+<!--Controls etc.-->
+<div id="show-controls">
+<div id="controls">
+
+  <div>
+    <input type="checkbox" id="iframePerspective"  checked="true" />
+  </div>
+
+  <div>
+    <input type="number" id="iframeWidth" placeholder="Width 400" value="400" />
+  </div>
+
+  <div>
+    <input type="number" id="iframeHeight" placeholder="Height 650" value="650" />
+  </div>
+
+  <div>
+    <input type="text" id="iframeURL" placeholder="https://noviks.dk/app/" value="https://noviks.dk/app/" />
+  </div>
+
+</div>
+</div>
+
+<!-- View buttons -->
+<div id="show-view">
+  <div id="views">
+    <button value="3" onclick="marginUp()">Front</button>
+    <button value="2" onclick="marginUp()">Side</button>
+    <button value="1" onclick="marginDown()">Lay</button>
+  </div>
+</div>
+
+
+
+
+</div>
+<script src="js/index.js"></script>    
+</body>
+</html>
