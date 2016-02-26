@@ -210,6 +210,11 @@ require(["./config"], function(){
                     }
                 });
 
+
+                $(document).on("click", ".settings-button-edit", function(){
+                    $(this).parent().find("p").attr("contenteditable", true).focus();
+                });
+
                 $("#btn_logout").on("click", function(){
                    datastore.user.logout(function(){
                        view.login();

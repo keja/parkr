@@ -2395,6 +2395,7 @@ html body #view .settings-deletable p {
   position: absolute;
   left: 10px;
   top: -4px;
+  width: 200px;
 }
 html body #view .settings-button-edit {
   position: absolute;
