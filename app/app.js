@@ -164,7 +164,11 @@ require(["./config"], function(){
                         map.addMarker(0, {lat: position.coords.latitude, lng: position.coords.longitude}, "You are here", "<p>You are here</p>", icon_me);
                     });
                 }
-                map.addMarker(1, {lat: 55.403756, lng: 10.402370}, "Your car is here", "<p>Your car are here</p>", icon_car);
+                datastore.car.getParked(function(result){
+                   if(result){ //TODO: add lat & lng from db, when added to db.
+                       map.addMarker(1, {lat: 55.403756, lng: 10.402370}, "Your car is here", "<p>Your car are here</p>", icon_car);
+                   }
+                });
 
             }
 
