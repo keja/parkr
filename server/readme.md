@@ -34,6 +34,6 @@
 | Create a log-entry, used when parking | /api/v1/log                  | POST | {"location_id": \<int\>, "owner_id": \<int\>, "vehicle_id": \<int\>, "expires": "\<timestamp\>"} |                                                                 |
 
 #HTTP Response Codes
-HTTP GET returns 200 on ok
-HTTP POST returns 201 on successful create
-HTTP POST return 422 on unsuccesful requests
+* HTTP GET returns 200 on ok
+* HTTP POST returns 201 on successful create
+* HTTP POST return 422 on unsuccesful requests
