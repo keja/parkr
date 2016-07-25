@@ -1,55 +1,37 @@
-https://docs.google.com/document/d/1ZpVinN_jl-26V763sq2jFlYgEiE6hxTZQpv8rJbPSTY/edit
-
 #Endpoints
-**List all users GET** 
-http://188.166.1.167/api/v1/users
+###Users
 
-**Create a user POST** 
-http://188.166.1.167/api/v1/user
-Takes data as {"name": "<str>", "email": "<str>", "username": "<str>", "password": "<str>"}
+|Description                   | Endpoint                     | Type |  Args                                                                                 | Note                                                            |
+|------------------------------|------------------------------|------|---------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| List all users               | /api/v1/users                | GET  | N/A                                                                                   |                                                                 |
+| Create a user                | /api/v1/users                | POST | {"name": "\<str\>", "email": "\<str\>", "username": "\<str\>", "password": "\<str\>"} |                                                                 |
+| Login                        | /api/v1/user/login           | POST | {"email": "\<str\>", "password": "\<str\>"}                                           | Return the user-object (save the id locally for reuse as “token”|
+| List all vehicles by user    | /api/v1/user/\<id\>/vehicles | GET  | id in url                                                                             |                                                                 |
+| List all active logs by user | /api/v1/user/\<id\>/active   | GET  | id in url                                                                             |                                                                 |
+| List all old logs by user    | /api/v1/user/\<id\>/history  | GET  | id in url                                                                             |                                                                 |
 
-**Log a user in POST**
-http://188.166.1.167/api/v1/user/login
-Return the user-object (save the id locally for reuse as “token”)
-Takes data as {"email": "<str>", "password": "<str>"}
+###Vehicles
 
-**List all vehicles by user GET** 
-http://188.166.1.167/api/v1/user/<id>/vehicles 
+|Description                   | Endpoint                     | Type |  Args                                                                                 | Note                                                            |
+|------------------------------|------------------------------|------|---------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| List all vehicles            | /api/v1/vehicles             | GET  | N/A                                                                                   |                                                                 |
+| Create new vehicle           | /api/v1/vehicle              | POST | {"title": "\<str\>", "plate": "\<str\>", "owner_id": \<int\>}                         | owner_id = the currently logged in users id                     |
+| Delete a vehicle             | /api/v1/vehicle/\<id\>       | DEL  | id in url                                                                             |                                                                 |
 
-**List all active logs by user GET**
-http://188.166.1.167/api/v1/user/<id>/active
+###Locations
 
-**List all old logs by user GET**
-http://188.166.1.167/api/v1/user/<id>/history
+|Description                   | Endpoint                     | Type |  Args                                                                                 | Note                                                            |
+|------------------------------|------------------------------|------|---------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| List all locations           | /api/v1/locations            | GET  | N/A                                                                                   |                                                                 |
+| Get location by id           | /api/v1/location/\<id\>      | GET  | id in url                                                                             | Returns an object: {locationObject, isLocationFree (bool)}      |
+| Create a location            | /api/v1/location             | POST | {"zone": "<str>", "price": <int>, "lat": <float>, "long": <float>}                    |                                                                 |
 
-**List all vehicles GET** 
-http://188.166.1.167/api/v1/vehicles 
+###Log
 
-**Create new vehicle POST** 
-http://188.166.1.167/api/v1/vehicle
-Takes data as {"title": "<str>", "plate": "<str>", "owner_id": <int>}
-Note: owner_id = the currently logged in users id
-
-**Delete a vehicle DEL** 
-http://188.166.1.167/api/v1/vehiclevehicle/<id>
-
-**List all locations GET** 
-http://188.166.1.167/api/v1/locations
-
-**Get location by id GET**
-http://188.166.1.167/api/v1/location/<id>
-Returns an object: {locationObject, isLocationFree (bool)}
-
-**Create a location POST** 
-http://188.166.1.167/api/v1/location 
-Takes data as {"zone": "<str>", "price": <int>, "lat": <float>, "long": <float>}
-
-**List all log-entries GET** 
-http://188.166.1.167/api/v1/logs
-
-**Create a log-entry, used when parking POST** 
-http://188.166.1.167/api/v1/log
-Takes data as {"location_id": <int>, "owner_id": <int>, "vehicle_id": <int>, "expires": "<timestamp>"}
+|Description                            | Endpoint                     | Type |  Args                                                                                            | Note                                                            |
+|---------------------------------------|------------------------------|------|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| List all log-entries                  | /api/v1/logs                 | GET  | N/A                                                                                              |                                                                 |
+| Create a log-entry, used when parking | /api/v1/log                  | POST | {"location_id": \<int\>, "owner_id": \<int\>, "vehicle_id": \<int\>, "expires": "\<timestamp\>"} |                                                                 |
 
 #HTTP Response Codes
 HTTP GET returns 200 on ok
